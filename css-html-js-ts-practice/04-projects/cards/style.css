@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
     font-family: 'Oswald', Times;
-
 }
 
 header {
@@ -19,18 +18,16 @@ header {
 
 .header_menu_container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
     flex: 1;
     font-size: 24px;
 }
 
-.header_menu_container button {
-    display: block;
-    flex: 1;
-    font-size: inherit;
-    background-color: transparent;
-    border: none;
+a:hover {
+    cursor: pointer;
 }
+
 
 p.header {
     margin: 0px 25px;
@@ -41,18 +38,14 @@ button:hover {
     cursor: pointer;
 }
 
-@keyframes button_clicked {
+/* @keyframes button_clicked {
     50% { transform: scale(0.9); }
     100% { transform: scale(1); }
 }
 
 header button:focus {
     animation: button_clicked 0.15s ease-in-out;
-}
-
-.thing_name {
-    margin: 8px 0px;
-}
+} */
 
 .price {
     margin: 8px 0px;
@@ -66,8 +59,9 @@ body {
 
 .cards-container {
     display: flex;
-    margin-top: 75px;
-    margin-left: 10px;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 75px 20px;
 }
 
 .badge {
@@ -95,10 +89,104 @@ body {
 
 .card {
     position: relative;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
     background-color: bisque;
     border: 2px solid black;
     border-radius: 5%;
     width: 250px;       
+    height: 300px;
     transition: transform 0.2s ease;
 }
+
+
+.price {
+    margin: 0px;
+}
+
+.thing_name {
+    margin: 0px;
+}
+
+.card_top_container {
+    flex: 1;
+}
+
+.card_bottom_container {
+    flex-shrink: 0;
+}
+
+button.to_cart {
+    font-size: 1em;
+    padding: 2px;
+    text-align: center;
+}
+
+header button {
+    font-size: inherit;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin: 16px, 0px;
+}
+
+.things_menu_trigger,
+.gadjets_menu_trigger {
+    position: relative;
+}
+
+.things_menu_trigger::after {
+    content:'';
+    position: absolute;
+    left: 0;
+    top: 100%;
+    height: 12px;
+    width: 100%
+    /* visibility: hidden; */
+    /* opacity: 0; */
+}
+
+.things_menu,
+.gadjets_menu {
+    font-size: 0.75em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    visibility: hidden;
+    margin-top: 12px;
+    left: 0;
+    top: 100%;
+    opacity: 0;
+    background-color: bisque;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 10%;
+    /* transform: translateX(-50%); */
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.gadjets_menu {
+    font-size: 1em;
+    top: 0;
+    left: 100%;
+    margin-left: 16px;
+}
+
+.things_menu_trigger:hover .things_menu,
+.gadjets_menu_trigger:hover .gadjets_menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+.gadjets_menu_trigger::after {
+    position: absolute;
+    content: '';
+    left: 100%;
+    top: 0;
+    width: 16px;
+    height: 125%;
+}
+
