@@ -12,8 +12,8 @@ body {
     justify-content: center;
     justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    row-gap: 28px;
-    column-gap: 28px;
+    row-gap: clamp(18px, 2vw, 28px);
+    column-gap: clamp(18px, 2vw, 28px);
 }
 
 img {
@@ -35,9 +35,5 @@ img:hover {
     img{
         width: 100%;
         height: 200px;
-    }
-
-    .photo_container {
-        row-gap: 18px;
     }
 }
