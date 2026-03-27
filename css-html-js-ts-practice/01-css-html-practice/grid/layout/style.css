@@ -10,7 +10,7 @@ html {
 body {
     height: 100vh;
     margin: 0;
-
+    align-items: stretch;
     display: grid;
     grid-template-columns: repeat(3, minmax(150px, 1fr));
     grid-template-rows: 75px 1fr 75px;
@@ -35,10 +35,9 @@ header {
     grid-area: rightsidebar;
 }
     
-main div {
+div {
     background-color: aquamarine;
     grid-area: content;
-    height: 100%;
 }
 
 footer {

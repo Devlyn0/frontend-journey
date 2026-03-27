@@ -9,19 +9,20 @@ body {
 
 .photo_container {
     display: grid;
-    justify-content: center;
-    justify-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    row-gap: clamp(18px, 2vw, 28px);
-    column-gap: clamp(18px, 2vw, 28px);
+    justify-items: stretch;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: clamp(8px, 3vw, 36px);
+    
+    padding: 8px;
 }
+
 
 img {
     display: block;
     border: 2px solid black;
     border-radius: 25px;
-    width: 300px;
-    height: 175px;
+    max-width: 325px;
+    max-height: 175px;
     object-fit: cover;
 
     transition: transform 0.15s ease, margin 0.15s;
