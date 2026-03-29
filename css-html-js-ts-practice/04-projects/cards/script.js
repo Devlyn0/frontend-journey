@@ -19,11 +19,6 @@ const closeContacts = () => {
     document.body.style.overflow = '';
 }
 
-const openHumburgerMenu = () => {
-    let humburgerMenu = document.querySelector('.humburger_menu');
-    humburgerMenu.classList.add('open');
-}
-
 const handleHumburgerMenu = () => {
     let humburgerMenu = document.querySelector('.humburger_menu');
     if (humburgerMenu.classList.contains('open')) {

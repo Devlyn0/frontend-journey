@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+
+<html>
+
+    <head>
+    <meta charset="utf-8">
+        <style>
+
+            #field:hover {
+                cursor: pointer;
+            }
+
+            #field {
+                width: 500px;
+                height: 500px;
+                border: 20px solid black;
+                background-color: #00FF00;
+                overflow: hidden;
+            }
+
+            #ball {
+                transition: transform 0.5s ease;
+            }
+
+        </style>
+    </head>
+
+    <body style="height:2000px">
+
+        <h1 style='font-size: 22px; font-weight: 900; margin: 0 auto; width: 35%;'>Нажмите на поле для перемещения мяча.<h1>
+
+        <div style='margin: 0 auto' id="field">
+            <img src="https://ru.js.cx/clipart/ball.svg" id="ball">
+        </div>
+
+        <script>
+            const ball = document.querySelector('#ball');
+            const field = document.querySelector('#field');
+            const fieldWidth = field.clientWidth;
+            const fieldHeight = field.clientHeight;
+            const ballAnimated = document.querySelector('#ball.animated');
+            let ballWidth = 0;
+            let ballHeight = 0;
+
+            window.onload = function() {
+                ballWidth = ball.clientWidth/2;
+                ballHeight = ball.clientHeight/2;
+            }
+
+            const getTransformProperty = (offsetX, offsetY) => {
+                return `translate(
+                    calc(${offsetX}px - 50%)
+                    , calc(${offsetY}px - 50%)
+                )`;
+            }
+
+            //outerObjectSize - размер объекта, внутри котого движется movedObjectSize объект
+            function handleCollision(targetPoint, movedObjectSize, outerObjectSize) { 
+                if ((targetPoint + movedObjectSize) > outerObjectSize) {
+                    // console.log(`
+                    //     collision! 
+                    //     handled=${outerObjectSize - ((targetPoint + movedObjectSize) - outerObjectSize)}
+                    // `)
+                    return outerObjectSize - movedObjectSize;
+                } 
+                else if (targetPoint - movedObjectSize < 0) {
+                    return movedObjectSize
+                } 
+                else {
+                    // console.log('not collision')
+                    return targetPoint;
+                }
+            } 
+
+            field.addEventListener('click', function(e) {
+                console.clear();
+                // console.log(`
+                //     target X: ${e.offsetX} 
+                //     target Y: ${e.offsetY}
+                // `);
+                // console.log(`
+                //     X with ball: ${e.offsetX + ballWidth} 
+                //     Y with ball: ${e.offsetY + ballHeight}
+                // `);
+                const x = handleCollision(e.offsetX, ballWidth, fieldWidth)
+                const y = handleCollision(e.offsetY, ballHeight, fieldHeight);
+                ball.style.transform = getTransformProperty(x, y);
+                // ballAnimated.classList.toogle('animated');
+            })
+            
+        </script>
+    </body>
+</html>
