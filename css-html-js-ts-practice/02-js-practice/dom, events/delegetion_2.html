@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    table {
+       border-collapse: collapse;
+     }
+     th, td {
+       border: 1px solid black;
+       padding: 4px;
+     }
+     th {
+       cursor: pointer;
+     }
+     th:hover {
+       background: yellow;
+     }
+  </style>
+</head>
+
+<body>
+
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>Вася</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Петя</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Женя</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Маша</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Илья</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function parseRecords(records) { // Возвращает массив объектов значений каждой записи - {age, name}
+      let values = []
+      records.forEach((item) => {
+        let ageColumn = item.firstElementChild.textContent;
+        let nameColumn = item.lastElementChild.textContent;
+        values.push({age: Number(ageColumn), name: nameColumn});
+      })
+      return values;
+    }
+
+    function sortTable(records, sortType) {
+      let parsedRecords = parseRecords(records);
+      let sortedRecords = [];
+
+      if (sortType === 'number') {
+        sortedRecords = parsedRecords.sort((a, b) => a.age - b.age);
+      }
+      else if (sortType === 'string') {
+        sortedRecords = parsedRecords.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      else {
+        throw 'Неизвестный тип сортировки';
+      }
+      return sortedRecords;
+    }
+
+    function rewriteTable(table, recordsToRewrite) {
+      let tableRows = table.querySelectorAll('tbody tr');
+      let counter = 0;
+      tableRows.forEach((item) => {
+        let ageCell = item.firstElementChild;
+        let nameCell = item.lastElementChild;
+        ageCell.textContent = recordsToRewrite[counter].age;
+        nameCell.textContent = recordsToRewrite[counter].name;
+
+        counter+=1;
+      })
+    }
+
+    grid.addEventListener('click', (e) => {
+      let notSortedRecords = e.currentTarget.querySelectorAll('tbody tr');
+      let sortedRecords = sortTable(notSortedRecords, e.target.dataset.type);
+      rewriteTable(e.currentTarget, sortedRecords);
+    })
+  </script>
+
+</body>
+</html>
