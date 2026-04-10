@@ -2,18 +2,21 @@ export class StorageManager {
     constructor() {
         return;
     }
-    get(key, defaultValue) {
+    get<T>(key: string, defaultValue: T | T[]): T | T[] | null {
         let value = localStorage.getItem(key);
-        return JSON.parse(value) ?? defaultValue;
+        if (!value) {
+            return defaultValue;
+        }
+        return JSON.parse(value);
     }
-    set(key, value) {
+    set<T>(key: string, value: T | null): void {
         let jsonValue = JSON.stringify(value);
         localStorage.setItem(key, jsonValue);
     }
-    removeItem(key) {
+    removeItem(key: string): void {
         localStorage.removeItem(key);
     }
-    clear() {
+    clear(): void {
         localStorage.clear();
     }
 }
